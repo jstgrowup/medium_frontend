@@ -1,4 +1,4 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atom } from "recoil";
 
 export const UserState = atom({
   key: "userAtom",
