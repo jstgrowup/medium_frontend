@@ -26,7 +26,7 @@ const SigninForm = () => {
         const token = response.data;
         setCount(token);
         Cookies.set("token", token);
-        navigate("/blogs");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

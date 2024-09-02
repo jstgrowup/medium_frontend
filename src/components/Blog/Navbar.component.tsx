@@ -3,7 +3,7 @@ import { Avatar } from "./Avatar.component";
 const Navbar = () => {
   return (
     <div className="border-b flex justify-between px-10 py-4 items-center">
-      <Link to={"/blogs"}>
+      <Link to={"/"}>
         <div className="font-semibold text-lg flex items-center cursor-pointer">
           Medium
         </div>

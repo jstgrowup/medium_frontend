@@ -16,7 +16,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<SignIn />} />
           <Route
-            path="/blogs"
+            path="/"
             element={
               <Suspense fallback={<BlogSkeleton />}>
                 <Blogs />
