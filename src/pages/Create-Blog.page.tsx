@@ -34,16 +34,17 @@ const CreateBlog = () => {
         blog,
         token
       );
+
       setBlogState((prevState) => ({
         ...prevState,
-        title: response.data.title,
-        content: response.data.content,
-        published: response.data.published,
-        id: response.data.id,
+        title: response?.data?.data?.title,
+        content: response?.data?.data?.content,
+        published: response?.data?.data?.published,
+        id: response?.data?.data?.id,
         loading: false,
         success: true,
       }));
-      navigate(`/blog/${response.data.id}`);
+      navigate(`/blog/${response?.data?.data?.id}`);
     } catch (error) {
       setBlogState((prevState) => ({
         ...prevState,

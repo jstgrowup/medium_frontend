@@ -25,12 +25,14 @@ export interface BlogBodyInterface extends BlogType {
 }
 export interface CreatedBlogResponseBody {
   data: {
-    authorId: string;
-    content: string;
-    createdAt: string;
-    id: string;
-    published: boolean;
-    title: string;
-    updatedAt: string;
+    data: {
+      authorId: string;
+      content: string;
+      createdAt: string;
+      id: string;
+      published: boolean;
+      title: string;
+      updatedAt: string;
+    };
   };
 }
