@@ -38,4 +38,18 @@ export const useAuthStore = create<TokenStoreType>((set) => ({
       set({ error: error.message, loading: false });
     }
   },
+  checkSessionToken: async (payload: SigninPayloadType) => {
+    set({ loading: true, error: null, data: null });
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/user/signin`,
+        payload
+      );
+      showSuccessToast(response.data.message);
+      set({ token: response.data.token, loading: false, data: response.data });
+    } catch (error: any) {
+      showErrorToast(error.response.data.error);
+      set({ error: error.message, loading: false });
+    }
+  },
 }));
