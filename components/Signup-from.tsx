@@ -4,7 +4,7 @@ import { useState } from "react";
 import LabelledInput from "./Labelled-input";
 import AuthHeader from "./Auth-header";
 import AuthButton from "./Auth-button";
-import { useAuthStore } from "@/store";
+import { useAuthStore } from "@/stores/auth.store";
 import { SignupInput } from "@jstgrwup/medium-common";
 
 const SignupForm = () => {
