@@ -14,6 +14,7 @@ const SignupForm = () => {
     password: "",
   });
   const signupAction = useAuthStore((state) => state.signUpAction);
+  const isLoading = useAuthStore((state) => state.loading);
   const handleSubmitForm = () => {
     signupAction(userInputs);
   };
@@ -43,7 +44,11 @@ const SignupForm = () => {
             setuserInput({ ...userInputs, password: e.target.value })
           }
         />
-        <AuthButton type={AUTH_TYPE.SIGNUP} onclickFunc={handleSubmitForm} />
+        <AuthButton
+          type={AUTH_TYPE.SIGNUP}
+          onclickFunc={handleSubmitForm}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );

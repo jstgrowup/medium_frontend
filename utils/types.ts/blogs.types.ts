@@ -36,3 +36,9 @@ export interface CreatedBlogResponseBody {
     };
   };
 }
+export type BlogStoreType = {
+  loading: boolean;
+  error: string | null;
+  blogs: BlogType[];
+  bulkBlogsAction: () => Promise<void>;
+};
