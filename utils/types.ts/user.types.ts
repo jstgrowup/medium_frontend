@@ -10,8 +10,8 @@ export type SigninPayloadType = {
   email: string;
   password: string;
 };
-export type TokenStoreType = {
-  token: string;
+export type AuthStoreType = {
+  isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
   data: any;

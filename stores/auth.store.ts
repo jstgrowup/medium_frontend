@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import {
+  AuthStoreType,
   SigninPayloadType,
   SignupPayloadType,
-  TokenStoreType,
 } from "../utils/types.ts/user.types";
 import axios from "axios";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
-export const useAuthStore = create<TokenStoreType>((set) => ({
-  token: "",
+export const useAuthStore = create<AuthStoreType>((set) => ({
   loading: false,
+  isAuthenticated: false,
   error: null,
   data: null,
   signUpAction: async (payload: SignupPayloadType) => {
@@ -19,9 +19,9 @@ export const useAuthStore = create<TokenStoreType>((set) => ({
         payload
       );
 
-      set({ token: response.data.token, loading: false, data: response.data });
+      set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
-      set({ error: error.message, loading: false });
+      set({ error: error.message, loading: false, isAuthenticated: false });
     }
   },
   signInAction: async (payload: SigninPayloadType) => {
@@ -32,10 +32,10 @@ export const useAuthStore = create<TokenStoreType>((set) => ({
         payload
       );
       showSuccessToast(response.data.message);
-      set({ token: response.data.token, loading: false, data: response.data });
+      set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
       showErrorToast(error.response.data.error);
-      set({ error: error.message, loading: false });
+      set({ error: error.message, loading: false, isAuthenticated: false });
     }
   },
   checkSessionToken: async (payload: SigninPayloadType) => {
@@ -46,7 +46,7 @@ export const useAuthStore = create<TokenStoreType>((set) => ({
         payload
       );
       showSuccessToast(response.data.message);
-      set({ token: response.data.token, loading: false, data: response.data });
+      set({ loading: false, data: response.data });
     } catch (error: any) {
       showErrorToast(error.response.data.error);
       set({ error: error.message, loading: false });
