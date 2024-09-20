@@ -17,6 +17,14 @@ export interface BlogType {
   };
   id?: string;
 }
+export interface BulkBlogResponseType {
+  data: BlogType[];
+}
+export interface BlogPayloadType {
+  published?: boolean;
+  title?: string;
+  content?: string;
+}
 export interface BlogBodyInterface extends BlogType {
   published: boolean;
   loading?: boolean;
@@ -25,20 +33,14 @@ export interface BlogBodyInterface extends BlogType {
 }
 export interface CreatedBlogResponseBody {
   data: {
-    data: {
-      authorId: string;
-      content: string;
-      createdAt: string;
-      id: string;
-      published: boolean;
-      title: string;
-      updatedAt: string;
-    };
+    message: string;
   };
 }
 export type BlogStoreType = {
   loading: boolean;
   error: string | null;
   blogs: BlogType[];
-  bulkBlogsAction: () => Promise<void>;
+  bulkBlogsAction: () => Promise<BulkBlogResponseType | undefined>;
+  createBlogAction: (payload: BlogPayloadType) => void;
+  individualBlogAction: (blogId: string) => BlogType;
 };

@@ -7,6 +7,7 @@ import BlogCard from "../Blog-card";
 const Blogs = () => {
   const bulkBlogs = useBlogStore((state) => state.bulkBlogsAction);
   const blogs = useBlogStore((state) => state.blogs);
+
   useEffect(() => {
     bulkBlogs();
   }, [bulkBlogs]);

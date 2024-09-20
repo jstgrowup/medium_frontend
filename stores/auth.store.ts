@@ -29,7 +29,8 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/user/signin`,
-        payload
+        payload,
+        { withCredentials: true }
       );
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });

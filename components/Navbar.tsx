@@ -11,7 +11,7 @@ const Navbar = () => {
       </Link>
       <div className="flex gap-4">
         <div>
-          <Link href={"/create-blog"}>
+          <Link href={"/blog/create"}>
             <div className="w-32 bg-green-700 text-white font-semibold flex justify-center items-center px-4 py-2 rounded-full hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
               Create Blog
             </div>
