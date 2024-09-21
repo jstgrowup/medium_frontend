@@ -15,7 +15,6 @@ const SigninForm = () => {
   });
   const signinAction = useAuthStore((state) => state.signInAction);
   const isLoading = useAuthStore((state) => state.loading);
-  console.log("isLoading:", isLoading);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const handleSubmitForm = () => {
     signinAction(userInputs);
