@@ -15,7 +15,7 @@ const BlogCard: React.FC<BlogType> = ({
   return (
     <Link href={`/blog/${id}`}>
       {isLoading ? (
-        <div className="animate-pulse flex flex-col gap-4 transition-transform hover:shadow-lg rounded-lg cursor-pointer mx-auto">
+        <div className="animate-pulse flex flex-col gap-4 transition-transform hover:shadow-lg rounded-lg cursor-pointerw-screen max-w-screen-md pb-6 px-4 pt-4">
           <div className="flex items-center gap-4">
             <div className="h-10 w-10 bg-gray-200 rounded-full"></div>
             <div className="flex flex-col">

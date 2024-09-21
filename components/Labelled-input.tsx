@@ -1,4 +1,4 @@
-import { LabelledInterface } from "@/utils/types.ts/Global-types";
+import { LabelledInterface } from "@/utils/types.ts/blogs.types";
 
 const LabelledInput = ({
   label,
