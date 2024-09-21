@@ -10,6 +10,7 @@ export const IndividualBlog = () => {
   const paramsHook = useParams();
   const params = paramsHook;
   const blogId = params.blogId as string;
+
   useEffect(() => {
     const fetchBlog = async () => {
       try {
