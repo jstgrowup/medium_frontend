@@ -1,9 +1,10 @@
 "use client";
+import dynamic from "next/dynamic";
 import BlogHeader from "@/components/blogs/Blog-header";
 import BlogTitleInput from "@/components/blogs/Blog-title";
 import { useBlogStore } from "@/stores/blog.store";
 import { BlogBodyInterface } from "@/utils/types.ts/blogs.types";
-import JoditEditor from "jodit-react";
+const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 import { useRef, useState } from "react";
 
 export default function CreateBlog() {
