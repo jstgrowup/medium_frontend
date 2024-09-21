@@ -1,9 +1,7 @@
 "use client";
 import { AUTH_TYPE } from "@/utils/enums/Global-enums";
 import { useEffect, useState } from "react";
-
 import { SigninInput } from "@jstgrwup/medium-common";
-
 import { useAuthStore } from "@/stores/auth.store";
 import { useRouter } from "next/navigation";
 import AuthHeader from "./Auth-header";
@@ -17,6 +15,7 @@ const SigninForm = () => {
   });
   const signinAction = useAuthStore((state) => state.signInAction);
   const isLoading = useAuthStore((state) => state.loading);
+  console.log("isLoading:", isLoading);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const handleSubmitForm = () => {
     signinAction(userInputs);
