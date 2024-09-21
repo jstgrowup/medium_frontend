@@ -6,6 +6,7 @@ import {
   BlogType,
   BulkBlogResponseType,
   CreatedBlogResponseBody,
+  SingleBlogPropType,
 } from "@/utils/types.ts/blogs.types";
 import api from "@/utils/api";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
@@ -25,8 +26,8 @@ const createBlog = (
     { withCredentials: true }
   );
 };
-const getSingleBlog = (blogId: string): Promise<CreatedBlogResponseBody> => {
-  return api.get(
+const getSingleBlog = async (blogId: string): Promise<SingleBlogPropType> => {
+  return await api.get(
     `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/blog/${blogId}`,
     { withCredentials: true }
   );
@@ -58,16 +59,18 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
       set({ error: error.message, loading: false });
     }
   },
-  individualBlogAction: async (blogId: string) => {
+  individualBlogAction: async (
+    blogId: string
+  ): Promise<BlogType | undefined> => {
     set({ loading: true, error: null });
     try {
-      const blog = await getSingleBlog(blogId);
+      const response = await getSingleBlog(blogId);
       set({ loading: false });
-      return blog;
+      return response.data;
     } catch (error: any) {
-      console.log("error:", error);
-      showErrorToast(error.response.data.error);
+      showErrorToast(error.response?.data?.error || "An error occurred");
       set({ error: error.message, loading: false });
+      return undefined;
     }
   },
 }));

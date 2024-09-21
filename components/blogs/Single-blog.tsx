@@ -1,14 +1,12 @@
 import { BlogType } from "@/utils/types.ts/blogs.types";
 import React from "react";
 import { Avatar } from "../Avatar";
-
 const SingleBlog: React.FC<BlogType> = ({
   title,
   createdAt,
   content,
   author,
 }) => {
-  console.log("content:", content);
   return (
     <div className="grid grid-cols-12 px-16 w-full pt-5">
       <div className="  col-span-8 flex flex-col gap-4">

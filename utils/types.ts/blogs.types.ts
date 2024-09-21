@@ -20,6 +20,9 @@ export interface BlogType {
 export interface BulkBlogResponseType {
   data: BlogType[];
 }
+export interface SingleBlogPropType {
+  data: BlogType;
+}
 export interface BlogPayloadType {
   published?: boolean;
   title?: string;
