@@ -1,39 +1,41 @@
 "use client";
 import { AUTH_TYPE } from "@/utils/enums/Global-enums";
-import { useState } from "react";
-import LabelledInput from "./Labelled-input";
-import AuthHeader from "./Auth-header";
-import AuthButton from "./Auth-button";
-import { useAuthStore } from "@/stores/auth.store";
-import { SignupInput } from "@jstgrwup/medium-common";
+import { useEffect, useState } from "react";
 
-const SignupForm = () => {
-  const [userInputs, setuserInput] = useState<SignupInput>({
+import { SigninInput } from "@jstgrwup/medium-common";
+
+import { useAuthStore } from "@/stores/auth.store";
+import { useRouter } from "next/navigation";
+import AuthHeader from "./Auth-header";
+import LabelledInput from "./Labelled-input";
+import AuthButton from "./Auth-button";
+const SigninForm = () => {
+  const router = useRouter();
+  const [userInputs, setuserInput] = useState<SigninInput>({
     email: "",
-    name: "",
     password: "",
   });
-  const signupAction = useAuthStore((state) => state.signUpAction);
+  const signinAction = useAuthStore((state) => state.signInAction);
   const isLoading = useAuthStore((state) => state.loading);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const handleSubmitForm = () => {
-    signupAction(userInputs);
+    signinAction(userInputs);
   };
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
+
   return (
-    <div className="h-screen flex justify-center flex-col items-center">
-      <AuthHeader type={AUTH_TYPE.SIGNUP} />
+    <div className="h-screen flex justify-center flex-col items-center ">
+      <AuthHeader type={AUTH_TYPE.SIGNIN} />
       <div className=" min-w-10 mt-4">
         <LabelledInput
           label="Email"
           placeholder="Enter your email"
           onChange={(e: { target: { value: any } }) =>
             setuserInput({ ...userInputs, email: e.target.value })
-          }
-        />
-        <LabelledInput
-          label="Name"
-          placeholder="Enter your name"
-          onChange={(e: { target: { value: any } }) =>
-            setuserInput({ ...userInputs, name: e.target.value })
           }
         />
         <LabelledInput
@@ -45,7 +47,7 @@ const SignupForm = () => {
           }
         />
         <AuthButton
-          type={AUTH_TYPE.SIGNUP}
+          type={AUTH_TYPE.SIGNIN}
           onclickFunc={handleSubmitForm}
           isLoading={isLoading}
         />
@@ -54,4 +56,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SigninForm;

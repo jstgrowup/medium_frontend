@@ -4,8 +4,8 @@ import {
   SigninPayloadType,
   SignupPayloadType,
 } from "../utils/types.ts/user.types";
-import axios from "axios";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
+import api from "@/utils/api";
 export const useAuthStore = create<AuthStoreType>((set) => ({
   loading: false,
   isAuthenticated: false,
@@ -14,10 +14,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   signUpAction: async (payload: SignupPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/user/signup`,
-        payload
-      );
+      const response = await api.post(`/api/v1/user/signup`, payload);
 
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
@@ -27,11 +24,9 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   signInAction: async (payload: SigninPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/user/signin`,
-        payload,
-        { withCredentials: true }
-      );
+      const response = await api.post(`/api/v1/user/signin`, payload, {
+        withCredentials: true,
+      });
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
@@ -42,10 +37,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   checkSessionToken: async (payload: SigninPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/user/signin`,
-        payload
-      );
+      const response = await api.post(`/api/v1/user/signin`, payload);
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data });
     } catch (error: any) {

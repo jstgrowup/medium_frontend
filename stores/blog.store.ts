@@ -11,26 +11,20 @@ import {
 import api from "@/utils/api";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
 const fetchBulkBlogs = async (): Promise<BulkBlogResponseType> => {
-  const response = await api.get(
-    `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/blog/get/bulk`,
-    { withCredentials: true }
-  );
+  const response = await api.get(`/api/v1/blog/get/bulk`, {
+    withCredentials: true,
+  });
   return response.data;
 };
 const createBlog = (
   blogPayload: BlogType
 ): Promise<CreatedBlogResponseBody> => {
-  return api.post(
-    `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/blog/create`,
-    blogPayload,
-    { withCredentials: true }
-  );
+  return api.post(`/api/v1/blog/create`, blogPayload, {
+    withCredentials: true,
+  });
 };
 const getSingleBlog = async (blogId: string): Promise<SingleBlogPropType> => {
-  return await api.get(
-    `${process.env.NEXT_PUBLIC_DEV_BACKEND_URL}/api/v1/blog/${blogId}`,
-    { withCredentials: true }
-  );
+  return await api.get(`/api/v1/blog/${blogId}`, { withCredentials: true });
 };
 export const useBlogStore = create<BlogStoreType>((set) => ({
   loading: false,

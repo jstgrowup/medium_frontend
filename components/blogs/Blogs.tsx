@@ -2,7 +2,7 @@
 import { useBlogStore } from "@/stores/blog.store";
 import { BlogType } from "@/utils/types.ts/blogs.types";
 import React, { useEffect } from "react";
-import BlogCard from "../Blog-card";
+import BlogCard from "./Blog-card";
 
 const Blogs = () => {
   const bulkBlogs = useBlogStore((state) => state.bulkBlogsAction);

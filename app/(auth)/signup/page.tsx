@@ -1,4 +1,4 @@
-import Quote from "@/components/Quote-auth";
+import Quote from "@/components/auth/Quote-auth";
 import SignupForm from "@/components/Signup-from";
 
 export default function Signup() {
