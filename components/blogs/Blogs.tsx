@@ -6,14 +6,11 @@ import BlogCard from "./Blog-card";
 import BlogLoader from "./Blogs-loader";
 
 const Blogs = () => {
-  const bulkBlogs = useBlogStore((state) => state.bulkBlogsAction);
-  const blogs = useBlogStore((state) => state.blogs);
-  const isLoading = useBlogStore((state) => state.loading);
-
+  const { bulkBlogsAction, blogs, loading } = useBlogStore((state) => state);
   useEffect(() => {
-    bulkBlogs();
-  }, [bulkBlogs]);
-  if (isLoading) {
+    bulkBlogsAction();
+  }, [bulkBlogsAction]);
+  if (loading) {
     return (
       <div>
         <BlogLoader />
