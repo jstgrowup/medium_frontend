@@ -9,7 +9,7 @@ const Blogs = () => {
   const { bulkBlogsAction, blogs, loading } = useBlogStore((state) => state);
   useEffect(() => {
     bulkBlogsAction();
-  }, [bulkBlogsAction]);
+  }, []);
   if (loading) {
     return (
       <div>
