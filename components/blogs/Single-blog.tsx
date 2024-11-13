@@ -1,6 +1,6 @@
 import { BlogType } from "@/utils/types.ts/blogs.types";
 import React from "react";
-import { Avatar } from "../Avatar";
+import { Avatar } from "../common/Avatar";
 import { useBlogStore } from "@/stores/blog.store";
 import { SingleBlogLoader } from "./Single-blogs-loader";
 const SingleBlog: React.FC<BlogType> = ({

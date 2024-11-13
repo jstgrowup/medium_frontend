@@ -8,7 +8,7 @@ export const AUTH_CONSTANTS = {
   WRONG_CREDS: "Wrong credentials, please try again",
 };
 export interface AuthUserResponseInterface {
-  id: string;
+  id?: string;
   email?: string;
   password?: string;
 }

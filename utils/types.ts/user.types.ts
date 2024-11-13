@@ -3,7 +3,6 @@ export interface UserAuthType {
 }
 export type SignupPayloadType = {
   email: string;
-  name: string;
   password: string;
 };
 export type SigninPayloadType = {

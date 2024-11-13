@@ -17,11 +17,10 @@ export async function middleware(request: NextRequest) {
 
   if (!token) {
     const redirectUrl = new URL("/auth", request.url);
-
     return NextResponse.redirect(redirectUrl);
   }
   return NextResponse.next();
 }
 export const config = {
-  matcher: ["/", "/auth"],
+  matcher: ["/"],
 };

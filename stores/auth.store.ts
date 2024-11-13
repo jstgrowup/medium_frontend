@@ -6,6 +6,7 @@ import {
 } from "../utils/types.ts/user.types";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
 import api from "@/utils/api";
+import { signIn } from "next-auth/react";
 export const useAuthStore = create<AuthStoreType>((set) => ({
   loading: false,
   isAuthenticated: false,
@@ -15,7 +16,6 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     set({ loading: true, error: null, data: null });
     try {
       const response = await api.post(`/api/v1/user/signup`, payload);
-
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
       set({ error: error.message, loading: false, isAuthenticated: false });
@@ -26,6 +26,11 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     try {
       const response = await api.post(`/api/v1/user/signin`, payload, {
         withCredentials: true,
+      });
+      await signIn("credentials", {
+        email: payload.email,
+        password: payload.password,
+        redirectTo: "/",
       });
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
