@@ -1,5 +1,4 @@
 import { create } from "zustand";
-
 import {
   BlogPayloadType,
   BlogStoreType,
@@ -10,10 +9,9 @@ import {
 } from "@/utils/types.ts/blogs.types";
 import api from "@/utils/api";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
+
 const fetchBulkBlogs = async (): Promise<BulkBlogResponseType> => {
-  const response = await api.get(`/api/v1/blog/get/bulk`, {
-    withCredentials: true,
-  });
+  const response = await api.get(`/api/v1/blog/get/bulk`);
   return response.data;
 };
 const createBlog = (

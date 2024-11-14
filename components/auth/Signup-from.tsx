@@ -8,8 +8,7 @@ import AuthButton from "./Auth-button";
 import Socials from "./Socials";
 
 import { showErrorToast, showSuccessToast } from "../common/toast";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+
 const SignupForm = () => {
   const [userInputs, setuserInput] = useState<{
     email: string;
@@ -18,27 +17,11 @@ const SignupForm = () => {
     email: "",
     password: "",
   });
-  const router = useRouter();
   const signupAction = useAuthStore((state) => state.signUpAction);
   const isLoading = useAuthStore((state) => state.loading);
-  const { data: session } = useSession();
   const handleSubmitForm = async () => {
-    // signupAction(userInputs);
     try {
-      const result = await signIn("credentials", {
-        email: userInputs.email,
-        password: userInputs.password,
-        redirect: false,
-        callbackUrl: "/",
-      });
-
-      console.log("result:", result);
-      if (result?.error) {
-        showErrorToast(result?.error || "errorororor");
-      } else {
-        showSuccessToast("Signined successfully");
-        router.push("/");
-      }
+      signupAction(userInputs);
     } catch (error) {
       console.log("error:", error);
       showErrorToast("error");

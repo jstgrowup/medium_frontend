@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getSession } from "next-auth/react";
+import Cookies from "js-cookie";
 const api = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
@@ -7,20 +7,17 @@ const api = axios.create({
       : process.env.NEXT_PUBLIC_PROD_BACKEND_URL,
   withCredentials: true,
 });
-api.interceptors.request.use(
-  async (config) => {
-    const session: any = await getSession();
-    console.log("session:here", session);
-    const token = session?.user?.accessToken;
+api.interceptors.request.use((config) => {
+  // Get the token cookie
 
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
+  const token = Cookies.get("token");
+  console.log("token:here", token);
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-);
+
+  return config;
+});
+
 export default api;

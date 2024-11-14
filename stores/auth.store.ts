@@ -6,7 +6,8 @@ import {
 } from "../utils/types.ts/user.types";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
 import api from "@/utils/api";
-import { signIn } from "next-auth/react";
+import axios from "axios";
+
 export const useAuthStore = create<AuthStoreType>((set) => ({
   loading: false,
   isAuthenticated: false,
@@ -15,7 +16,8 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   signUpAction: async (payload: SignupPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await api.post(`/api/v1/user/signup`, payload);
+      // const response = await api.post(`/api/v1/user/signup`, payload);
+      const response = await api.post(`/api/signin`, payload);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
       set({ error: error.message, loading: false, isAuthenticated: false });
@@ -24,14 +26,8 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   signInAction: async (payload: SigninPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await api.post(`/api/v1/user/signin`, payload, {
-        withCredentials: true,
-      });
-      await signIn("credentials", {
-        email: payload.email,
-        password: payload.password,
-        redirectTo: "/",
-      });
+      const response = await axios.post(`/api/signin`, payload);
+      console.log("response:", response);
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
