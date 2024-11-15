@@ -9,16 +9,28 @@ import {
 } from "@/utils/types.ts/blogs.types";
 import api from "@/utils/api";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
-
+import { callApi } from "@/actions/apiClient";
 const fetchBulkBlogs = async (): Promise<BulkBlogResponseType> => {
-  const response = await api.get(`/api/v1/blog/get/bulk`);
-  return response.data;
+  return callApi({
+    endpoint: `${
+      process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
+        ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
+        : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
+    }/api/v1/blog/get/bulk`,
+    method: "GET",
+  });
 };
 const createBlog = (
   blogPayload: BlogType
 ): Promise<CreatedBlogResponseBody> => {
-  return api.post(`/api/v1/blog/create`, blogPayload, {
-    withCredentials: true,
+  return callApi({
+    endpoint: `${
+      process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
+        ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
+        : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
+    }/api/v1/blog/create`,
+    method: "POST",
+    body: blogPayload,
   });
 };
 const getSingleBlog = async (blogId: string): Promise<SingleBlogPropType> => {

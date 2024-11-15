@@ -4,7 +4,6 @@ import { BlogType } from "@/utils/types.ts/blogs.types";
 import React, { useEffect } from "react";
 import BlogCard from "./Blog-card";
 import BlogLoader from "./Blogs-loader";
-import { useSession } from "next-auth/react";
 
 const Blogs = () => {
   const { bulkBlogsAction, blogs, loading } = useBlogStore((state) => state);

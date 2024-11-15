@@ -16,8 +16,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   signUpAction: async (payload: SignupPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      // const response = await api.post(`/api/v1/user/signup`, payload);
-      const response = await api.post(`/api/signin`, payload);
+      const response = await axios.post(`/api/signup`, payload);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
       set({ error: error.message, loading: false, isAuthenticated: false });
@@ -27,7 +26,6 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     set({ loading: true, error: null, data: null });
     try {
       const response = await axios.post(`/api/signin`, payload);
-      console.log("response:", response);
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {

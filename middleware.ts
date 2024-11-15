@@ -5,7 +5,6 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const isPublicPath = path === "/signin";
   const token = request.cookies.get("token")?.value;
-  console.log("token:", token);
 
   if (!token && !isPublicPath) {
     return NextResponse.redirect(new URL("/signin", request.url));
