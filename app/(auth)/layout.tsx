@@ -8,22 +8,17 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <div className="border-b p-1 text-center">
-        20% off for the next few days
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div className="h-screen flex justify-center flex-col items-center">
-          <AuthHeader type={AUTH_TYPE.SIGNIN} />
-          {children}
-          <div className="min-w-10 mt-1">
-            <Socials />
-          </div>
-        </div>
-        <div className="hidden lg:block">
-          <Quote />
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="h-screen flex justify-center flex-col items-center">
+        <AuthHeader type={AUTH_TYPE.SIGNIN} />
+        {children}
+        <div className="min-w-10 mt-1">
+          <Socials />
         </div>
       </div>
-    </>
+      <div className="hidden lg:block">
+        <Quote />
+      </div>
+    </div>
   );
 }
