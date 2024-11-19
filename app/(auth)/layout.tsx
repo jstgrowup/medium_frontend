@@ -9,7 +9,7 @@ export default function Layout({
 }>) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
-      <div className="h-screen flex justify-center flex-col items-center">
+      <div className="h-screen flex justify-center flex-col items-center ">
         <AuthHeader type={AUTH_TYPE.SIGNIN} />
         {children}
         <div className="min-w-10 mt-1">

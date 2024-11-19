@@ -4,11 +4,14 @@ import { BlogType } from "@/utils/types.ts/blogs.types";
 import React, { useEffect } from "react";
 import BlogCard from "./Blog-card";
 import BlogLoader from "./Blogs-loader";
+import { useFollowStore } from "@/stores/follow.store";
 
 const Blogs = () => {
   const { bulkBlogsAction, blogs, loading } = useBlogStore((state) => state);
+  const { followRecommendationsAction } = useFollowStore((state) => state);
   useEffect(() => {
     bulkBlogsAction();
+    followRecommendationsAction();
   }, []);
 
   if (loading) {
@@ -22,7 +25,7 @@ const Blogs = () => {
     );
   }
   return (
-    <div>
+    <div className="w-full">
       {blogs?.map((blog: BlogType) => {
         return (
           <BlogCard

@@ -43,21 +43,13 @@ const getSingleBlog = async (blogId: string): Promise<SingleBlogPropType> => {
     method: "GET",
   });
 };
-const followRecommendationsAction = async (): Promise<SingleBlogPropType> => {
-  return callApi({
-    endpoint: `${
-      process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
-        ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
-        : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
-    }/api/v1/blog/followers-recommendations`,
-    method: "GET",
-  });
-};
+
 export const useBlogStore = create<BlogStoreType>((set) => ({
   loading: false,
   blogs: [],
   error: null,
   data: null,
+  followRecommendations: [],
   bulkBlogsAction: async () => {
     set({ loading: true, error: null });
     try {
@@ -89,18 +81,6 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
       const response = await getSingleBlog(blogId);
       set({ loading: false });
       return response.data;
-    } catch (error: any) {
-      showErrorToast(error.response?.data?.error || "An error occurred");
-      set({ error: error.message, loading: false });
-      return undefined;
-    }
-  },
-  followRecommendations: async (): Promise<BlogType | undefined> => {
-    set({ loading: true, error: null });
-    try {
-      // const response = await followRecommendationsAction(blogId);
-      set({ loading: false });
-      // return response.data;
     } catch (error: any) {
       showErrorToast(error.response?.data?.error || "An error occurred");
       set({ error: error.message, loading: false });

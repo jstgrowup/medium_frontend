@@ -17,6 +17,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     set({ loading: true, error: null, data: null });
     try {
       const response = await axios.post(`/api/signup`, payload);
+      showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
       set({ error: error.message, loading: false, isAuthenticated: false });

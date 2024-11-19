@@ -12,7 +12,7 @@ const BlogCard: React.FC<BlogType> = ({
 }) => {
   return (
     <Link href={`/blog/${id}`}>
-      <div className="border-b border-slate-400 w-screen max-w-screen-md pb-6 px-4 pt-4 transition-transform hover:shadow-lg rounded-lg cursor-pointer mx-auto">
+      <div className="border-b border-slate-400  pb-6 px-4 pt-4 transition-transform hover:shadow-lg shadow-md rounded-lg cursor-pointer mx-auto">
         <div className="flex items-center gap-4">
           <Avatar size={"small"} name="subham" />
 

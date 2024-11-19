@@ -1,34 +1,46 @@
 "use client";
 import { AUTH_TYPE } from "@/utils/enums/Global-enums";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthStore } from "@/stores/auth.store";
 import AuthHeader from "./Auth-header";
 import LabelledInput from "./Labelled-input";
 import AuthButton from "./Auth-button";
 import Socials from "./Socials";
-
+import { useRouter } from "next/navigation";
 import { showErrorToast, showSuccessToast } from "../common/toast";
-
 const SignupForm = () => {
+  const router = useRouter();
   const [userInputs, setuserInput] = useState<{
     email: string;
     password: string;
+    name: string;
   }>({
     email: "",
     password: "",
+    name: "",
   });
   const signupAction = useAuthStore((state) => state.signUpAction);
   const isLoading = useAuthStore((state) => state.loading);
-  const handleSubmitForm = async () => {
-    try {
-      signupAction(userInputs);
-    } catch (error) {
-      console.log("error:", error);
-      showErrorToast("error");
-    }
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const handleSubmitForm = () => {
+    signupAction(userInputs);
   };
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  }, [isAuthenticated]);
   return (
-    <div className="min-w-10 mt-4">
+    <div className="min-w-10 mt-4 flex flex-col gap-2">
+      <LabelledInput
+        label="Name"
+        placeholder="Enter your name"
+        type="text"
+        onChange={(e: { target: { value: any } }) =>
+          setuserInput({ ...userInputs, name: e.target.value })
+        }
+      />
       <LabelledInput
         label="Email"
         placeholder="Enter your email"

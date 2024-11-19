@@ -31,6 +31,7 @@ export async function callApi({
       method,
       data: body,
     });
+
     return response.data;
   } catch (error: any) {
     throw new Error(error.response?.data?.message || "Something went wrong");

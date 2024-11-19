@@ -8,7 +8,7 @@ const LabelledInput = ({
 }: LabelledInterface) => {
   return (
     <div>
-      <label className="block mb-2 text-md font-semibold text-black">
+      <label className="block mb-1 text-md font-semibold text-black">
         {label}
       </label>
       <input
