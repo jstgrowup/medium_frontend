@@ -34,6 +34,17 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
       set({ error: error.message, loading: false, isAuthenticated: false });
     }
   },
+  logoutAction: async () => {
+    set({ loading: true, error: null, data: null });
+    try {
+      const response = await axios.post("/logout", {});
+      showSuccessToast(response.data.message);
+      set({ loading: false, data: response.data, isAuthenticated: true });
+    } catch (error: any) {
+      showErrorToast(error.response.data.error);
+      set({ error: error.message, loading: false, isAuthenticated: false });
+    }
+  },
   checkSessionToken: async (payload: SigninPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {

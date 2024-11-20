@@ -17,4 +17,5 @@ export type AuthStoreType = {
   data: any;
   signUpAction: (payload: SignupPayloadType) => Promise<void>;
   signInAction: (payload: SigninPayloadType) => Promise<void>;
+  logoutAction: () => void;
 };

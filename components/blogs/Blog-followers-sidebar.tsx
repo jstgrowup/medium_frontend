@@ -7,7 +7,7 @@ export default function WhoToFollow() {
   const { followRecommendations, loading } = useFollowStore((state) => state);
   if (loading) {
     return (
-      <div>
+      <div className="flex flex-col gap-3">
         <BlogFollowerSidebarLoader />
         <BlogFollowerSidebarLoader />
         <BlogFollowerSidebarLoader />
