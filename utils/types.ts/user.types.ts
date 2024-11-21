@@ -1,6 +1,12 @@
 export interface UserAuthType {
   token: string;
 }
+export interface UserType {
+  id: string;
+  email: string;
+  password: string;
+  name: string;
+}
 export type SignupPayloadType = {
   email: string;
   password: string;
@@ -23,4 +29,5 @@ export type AuthStoreType = {
   signUpAction: (payload: SignupPayloadType) => Promise<void>;
   signInAction: (payload: SigninPayloadType) => Promise<void>;
   logoutAction: () => Promise<LogoutResponseType | undefined>;
+  checkSessionToken: () => Promise<UserType | undefined>;
 };

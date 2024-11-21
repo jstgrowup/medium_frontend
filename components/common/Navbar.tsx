@@ -4,9 +4,15 @@ import Link from "next/link";
 import Dropdown from "./Dropdown";
 import { useAuthStore } from "@/stores/auth.store";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 export const Navbar = () => {
   const router = useRouter();
   const logoutAction = useAuthStore((state) => state.logoutAction);
+  const setUser = useAuthStore((state) => state.checkSessionToken);
+  const userData = useAuthStore((state) => state.data);
+  useEffect(() => {
+    setUser();
+  }, []);
   const handleLogout = async () => {
     await logoutAction();
     router.refresh();
@@ -26,7 +32,10 @@ export const Navbar = () => {
             </div>
           </Link>
         </>
-        <Dropdown logoutAction={handleLogout} />
+        <Dropdown
+          logoutAction={handleLogout}
+          userName={userData?.name?.[0] || ""}
+        />
       </div>
     </div>
   );

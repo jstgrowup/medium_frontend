@@ -10,32 +10,34 @@ import {
   DropdownMenuShortcut,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, User } from "lucide-react";
-
-const Dropdown: React.FC<{ logoutAction: () => void }> = ({ logoutAction }) => {
+const Dropdown: React.FC<{ logoutAction: () => void; userName: string }> = ({
+  logoutAction,
+  userName,
+}) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div
-          className={`relative  border-black border-2 inline-flex items-center justify-center overflow-hidden bg-white rounded-full  ${"w-10 h-10"}`}
+          className={`relative cursor-pointer border-black border-2 inline-flex items-center justify-center overflow-hidden bg-white rounded-full  ${"w-10 h-10"}`}
         >
           <span
-            className={`${"text-md"} font-extralight text-black dark:text-gray-300`}
+            className={`text-xl font-extralight text-black dark:text-gray-300 `}
           >
-            S
+            {userName ? userName : ""}
           </span>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 cursor-pointer">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">
             <User />
             <span>Profile</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={logoutAction}>
+        <DropdownMenuItem onClick={logoutAction} className="cursor-pointer">
           <LogOut />
           <span>Log out</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

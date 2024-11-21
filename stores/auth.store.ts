@@ -5,8 +5,9 @@ import {
   SignupPayloadType,
 } from "../utils/types.ts/user.types";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
-import api from "@/utils/api";
+
 import axios from "axios";
+import { callApi } from "@/actions/apiClient";
 
 export const useAuthStore = create<AuthStoreType>((set) => ({
   loading: false,
@@ -46,12 +47,19 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
       set({ error: error.message, loading: false, isAuthenticated: false });
     }
   },
-  checkSessionToken: async (payload: SigninPayloadType) => {
+  checkSessionToken: async () => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await api.post(`/api/v1/user/signin`, payload);
-      showSuccessToast(response.data.message);
+      const response = await callApi({
+        endpoint: `${
+          process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
+            ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
+            : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
+        }/api/v1/user/me`,
+        method: "GET",
+      });
       set({ loading: false, data: response.data });
+      return response;
     } catch (error: any) {
       showErrorToast(error.response.data.error);
       set({ error: error.message, loading: false });
