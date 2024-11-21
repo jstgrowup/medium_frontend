@@ -1,14 +1,8 @@
-export function Circle() {
-  return <div className="h-1 w-1 rounded-full bg-slate-500"></div>;
-}
-
-export function Avatar({
-  name,
-  size = "small",
-}: {
+interface AvatarInterface {
   name: string;
   size?: "small" | "big";
-}) {
+}
+const Avatar: React.FC<AvatarInterface> = ({ name, size = "small" }) => {
   return (
     <div
       className={`relative inline-flex items-center justify-center overflow-hidden bg-gray-600 rounded-full  ${
@@ -24,4 +18,5 @@ export function Avatar({
       </span>
     </div>
   );
-}
+};
+export default Avatar;

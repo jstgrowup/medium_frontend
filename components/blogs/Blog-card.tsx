@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar } from "../common/Avatar";
+import Avatar from "../common/Avatar";
 import Link from "next/link";
 import { BlogType } from "@/utils/types.ts/blogs.types";
 

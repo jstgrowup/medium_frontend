@@ -1,17 +1,16 @@
+"use client";
 import Link from "next/link";
-import { Avatar } from "./Avatar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-  DropdownMenuGroup,
-  DropdownMenuShortcut,
-} from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
-export const Navbar = async () => {
+
+import Dropdown from "./Dropdown";
+import { useAuthStore } from "@/stores/auth.store";
+import { useRouter } from "next/navigation";
+export const Navbar = () => {
+  const router = useRouter();
+  const logoutAction = useAuthStore((state) => state.logoutAction);
+  const handleLogout = async () => {
+    await logoutAction();
+    router.refresh();
+  };
   return (
     <div className="border-b flex justify-between px-10 py-4 items-center">
       <Link href={"/"}>
@@ -19,7 +18,6 @@ export const Navbar = async () => {
           Medium
         </div>
       </Link>
-
       <div className="flex gap-4">
         <>
           <Link href={"/blog/create"}>
@@ -28,29 +26,7 @@ export const Navbar = async () => {
             </div>
           </Link>
         </>
-        <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Avatar size={"big"} name="subham" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <User />
-                  <span>Profile</span>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <LogOut />
-                <span>Log out</span>
-                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <Dropdown logoutAction={handleLogout} />
       </div>
     </div>
   );

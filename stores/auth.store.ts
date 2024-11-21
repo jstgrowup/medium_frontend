@@ -37,9 +37,10 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
   logoutAction: async () => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await axios.post("/logout", {});
+      const response = await axios.post("/api/logout", {});
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
+      return response;
     } catch (error: any) {
       showErrorToast(error.response.data.error);
       set({ error: error.message, loading: false, isAuthenticated: false });

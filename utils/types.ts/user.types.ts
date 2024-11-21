@@ -10,6 +10,11 @@ export type SigninPayloadType = {
   email: string;
   password: string;
 };
+export type LogoutResponseType = {
+  data: {
+    message: string;
+  };
+};
 export type AuthStoreType = {
   isAuthenticated: boolean;
   loading: boolean;
@@ -17,5 +22,5 @@ export type AuthStoreType = {
   data: any;
   signUpAction: (payload: SignupPayloadType) => Promise<void>;
   signInAction: (payload: SigninPayloadType) => Promise<void>;
-  logoutAction: () => void;
+  logoutAction: () => Promise<LogoutResponseType | undefined>;
 };
