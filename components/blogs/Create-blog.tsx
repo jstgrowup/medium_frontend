@@ -19,7 +19,6 @@ export default function CreateBlog() {
   const handleBlogCreation = async () => {
     try {
       const response: any = createBlog(blog);
-      console.log("response:", response);
     } catch (error) {}
   };
   return (

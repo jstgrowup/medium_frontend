@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import BlogCard from "./Blog-card";
 import BlogLoader from "./Blogs-loader";
 import { useFollowStore } from "@/stores/follow.store";
-
 const Blogs = () => {
   const { bulkBlogsAction, blogs, loading } = useBlogStore((state) => state);
   const { followRecommendationsAction } = useFollowStore((state) => state);
