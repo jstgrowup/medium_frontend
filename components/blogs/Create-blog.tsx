@@ -6,7 +6,7 @@ import { useBlogStore } from "@/stores/blog.store";
 import { BlogBodyInterface } from "@/utils/types.ts/blogs.types";
 const JoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 import { useRef, useState } from "react";
-
+import { Input } from "@/components/ui/input";
 export default function CreateBlog() {
   const editorref = useRef(null);
   const [blog, setblog] = useState<BlogBodyInterface>({
@@ -16,11 +16,6 @@ export default function CreateBlog() {
   });
   const createBlog = useBlogStore((state) => state.createBlogAction);
   const blogLoading = useBlogStore((state) => state.loading);
-  const handleBlogCreation = async () => {
-    try {
-      const response: any = createBlog(blog);
-    } catch (error) {}
-  };
   return (
     <>
       <div className=" flex justify-center min-h-fit items-center pt-3">
@@ -37,9 +32,12 @@ export default function CreateBlog() {
             value={blog.content ?? ""}
             onChange={(newcontent) => setblog({ ...blog, content: newcontent })}
           />
-
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <BlogHeader header={"Please upload picture"} />
+            <Input id="picture" type="file" />
+          </div>
           <button
-            onClick={handleBlogCreation}
+            onClick={() => createBlog(blog)}
             className="w-48 bg-green-700 text-white font-semibold py-2 px-4 rounded-full hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
             {blogLoading ? "Publishing..." : "Publish"}

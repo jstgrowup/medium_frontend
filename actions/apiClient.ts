@@ -1,5 +1,4 @@
 "use server";
-// app/actions/apiClient.js
 import axios from "axios";
 import { cookies } from "next/headers";
 
@@ -23,6 +22,9 @@ export async function callApi({
         : process.env.NEXT_PUBLIC_PROD_BACKEND_URL,
     headers: {
       Authorization: `Bearer ${token}`,
+      ...(body instanceof FormData
+        ? {}
+        : { "Content-Type": "application/json" }),
     },
   });
   try {
