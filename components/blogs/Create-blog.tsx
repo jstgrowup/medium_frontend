@@ -30,7 +30,7 @@ export default function CreateBlog() {
     formData.append("file", file);
     try {
       const response = await uploadBlogImageAction(formData);
-      setblog({ ...blog, imageUrl: response?.data.uploadedUrl });
+      setblog({ ...blog, imageUrl: response?.data.url });
     } catch (error) {
       console.error("File upload failed:", error);
     }
@@ -55,7 +55,9 @@ export default function CreateBlog() {
             <BlogHeader header={"Please upload picture"} />
             <Input id="picture" type="file" onChange={handleFileChange} />
 
-            {imageUrl && <Image src={imageUrl} alt="image" />}
+            {imageUrl && (
+              <Image src={imageUrl} alt="image" width={100} height={100} />
+            )}
           </div>
           <button
             onClick={() => createBlog(blog)}

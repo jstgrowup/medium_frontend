@@ -97,7 +97,7 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
         formData
       );
       showSuccessToast(uplaodedImage.data.message);
-      set({ imageUrl: uplaodedImage?.data?.uploadedUrl });
+      set({ imageUrl: uplaodedImage?.data?.url });
       return uplaodedImage;
     } catch (error: any) {
       showErrorToast(error.response.data.error);

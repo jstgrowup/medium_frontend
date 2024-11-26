@@ -43,7 +43,7 @@ export interface CreatedBlogResponseBody {
 export interface uploadBlogImageResponseBody {
   data: {
     message: string;
-    uploadedUrl: string;
+    url: string;
   };
 }
 export type BlogStoreType = {
