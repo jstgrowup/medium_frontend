@@ -16,6 +16,7 @@ export interface BlogType {
     name?: string;
   };
   id?: string;
+  imageUrl?: string;
 }
 export interface BulkBlogResponseType {
   data: BlogType[];
@@ -39,11 +40,21 @@ export interface CreatedBlogResponseBody {
     message: string;
   };
 }
+export interface uploadBlogImageResponseBody {
+  data: {
+    message: string;
+    uploadedUrl: string;
+  };
+}
 export type BlogStoreType = {
   loading: boolean;
   error: string | null;
   blogs: BlogType[];
+  imageUrl: string;
   bulkBlogsAction: () => Promise<BulkBlogResponseType | undefined>;
   createBlogAction: (payload: BlogPayloadType) => void;
-  individualBlogAction: (blogId: string) => BlogType;
+  individualBlogAction: (blogId: string) => Promise<BlogType | undefined>;
+  uploadBlogImageAction: (
+    formdata: any
+  ) => Promise<uploadBlogImageResponseBody | undefined>;
 };

@@ -6,10 +6,11 @@ import {
   BulkBlogResponseType,
   CreatedBlogResponseBody,
   SingleBlogPropType,
+  uploadBlogImageResponseBody,
 } from "@/utils/types.ts/blogs.types";
-import api from "@/utils/api";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
 import { callApi } from "@/actions/apiClient";
+import axios from "axios";
 const fetchBulkBlogs = async (): Promise<BulkBlogResponseType> => {
   return callApi({
     endpoint: `${
@@ -50,6 +51,7 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
   error: null,
   data: null,
   followRecommendations: [],
+  imageUrl: "",
   bulkBlogsAction: async () => {
     set({ loading: true, error: null });
     try {
@@ -73,6 +75,7 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
       set({ error: error.message, loading: false });
     }
   },
+
   individualBlogAction: async (
     blogId: string
   ): Promise<BlogType | undefined> => {
@@ -85,6 +88,20 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
       showErrorToast(error.response?.data?.error || "An error occurred");
       set({ error: error.message, loading: false });
       return undefined;
+    }
+  },
+  uploadBlogImageAction: async (formData: any) => {
+    try {
+      const uplaodedImage: uploadBlogImageResponseBody = await axios.post(
+        "/api/s3-upload",
+        formData
+      );
+      showSuccessToast(uplaodedImage.data.message);
+      set({ imageUrl: uplaodedImage?.data?.uploadedUrl });
+      return uplaodedImage;
+    } catch (error: any) {
+      showErrorToast(error.response.data.error);
+      set({ error: error.message });
     }
   },
 }));
