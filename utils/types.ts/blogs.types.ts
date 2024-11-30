@@ -1,7 +1,6 @@
 import React from "react";
 
 export interface LabelledInterface {
-  label: string;
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
@@ -58,3 +57,8 @@ export type BlogStoreType = {
     formdata: any
   ) => Promise<uploadBlogImageResponseBody | undefined>;
 };
+export interface FileUploadProps {
+  onUpload: (imageUrl: string) => void;
+  existingImageUrl?: string;
+  uploadBlogImageAction: (formData: FormData) => Promise<any>;
+}

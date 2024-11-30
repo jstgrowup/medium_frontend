@@ -34,6 +34,7 @@ const Blogs = () => {
             createdAt={blog?.createdAt}
             content={blog.content}
             id={blog.id}
+            imageUrl={blog.imageUrl}
           />
         );
       })}
