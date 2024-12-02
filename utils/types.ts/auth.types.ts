@@ -12,3 +12,10 @@ export interface AuthUserResponseInterface {
   email?: string;
   password?: string;
 }
+export interface CommonModalProps {
+  triggerContent: React.ReactNode;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+}

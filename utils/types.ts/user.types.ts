@@ -1,3 +1,5 @@
+import { uploadBlogImageResponseBody } from "./blogs.types";
+
 export interface UserAuthType {
   token: string;
 }
@@ -6,6 +8,7 @@ export interface UserType {
   email: string;
   password: string;
   name: string;
+  profilePic: string;
 }
 export type SignupPayloadType = {
   email: string;
@@ -30,4 +33,10 @@ export type AuthStoreType = {
   signInAction: (payload: SigninPayloadType) => Promise<void>;
   logoutAction: () => Promise<LogoutResponseType | undefined>;
   checkSessionToken: () => Promise<UserType | undefined>;
+  updateProfilePictureAction: (
+    formdata: any
+  ) => Promise<uploadBlogImageResponseBody | undefined>;
+  updateProfileAction: (
+    imageUrl: string
+  ) => Promise<uploadBlogImageResponseBody | undefined>;
 };

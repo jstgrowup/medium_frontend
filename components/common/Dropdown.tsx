@@ -10,10 +10,11 @@ import {
   DropdownMenuShortcut,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, User } from "lucide-react";
-const Dropdown: React.FC<{ logoutAction: () => void; userName: string }> = ({
-  logoutAction,
-  userName,
-}) => {
+const Dropdown: React.FC<{
+  logoutAction: () => void;
+  userName: string;
+  profileRedirect: () => void;
+}> = ({ logoutAction, userName, profileRedirect }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,7 +32,10 @@ const Dropdown: React.FC<{ logoutAction: () => void; userName: string }> = ({
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={profileRedirect}
+          >
             <User />
             <span>Profile</span>
           </DropdownMenuItem>

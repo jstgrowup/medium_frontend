@@ -2,7 +2,6 @@ import { Input } from "@/components/ui/input";
 import { FileUploadProps } from "@/utils/types.ts/blogs.types";
 import Image from "next/image";
 import { useState } from "react";
-
 const BlogFileUpload = ({
   onUpload,
   existingImageUrl,
@@ -14,10 +13,8 @@ const BlogFileUpload = ({
   ) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
     const formData = new FormData();
     formData.append("file", file);
-
     try {
       const response = await uploadBlogImageAction(formData);
       const imageUrl = response?.data.url;

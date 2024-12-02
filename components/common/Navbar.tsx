@@ -17,6 +17,9 @@ export const Navbar = () => {
     await logoutAction();
     router.refresh();
   };
+  const profileRedirect = async () => {
+    router.push("/profile");
+  };
   return (
     <div className="border-b flex justify-between px-10 py-4 items-center">
       <Link href={"/"}>
@@ -34,6 +37,7 @@ export const Navbar = () => {
         </>
         <Dropdown
           logoutAction={handleLogout}
+          profileRedirect={profileRedirect}
           userName={userData?.name?.[0] || ""}
         />
       </div>
