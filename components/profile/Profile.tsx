@@ -7,15 +7,8 @@ const ProfileComponent = () => {
   return (
     <div className=" bg-white flex flex-col gap-3 shadow-lg rounded-lg w-full">
       <ProfileNavbar />
-      <ProfileHeader
-        jobRole="Software Engineer | Open Source Enthusiast"
-        name="Subham"
-      />
-      <ProfileAbout
-        about="Passionate about building scalable web applications and exploring new
-        technologies. Loves to contribute to open-source projects and write
-        technical blogs."
-      />
+      <ProfileHeader />
+      <ProfileAbout />
       <ProfileFollowInformation posts={120} followers={300} following={340} />
       <div className="px-6 py-4 border-t">
         <div className="flex gap-6">

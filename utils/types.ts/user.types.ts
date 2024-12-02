@@ -10,6 +10,15 @@ export interface UserType {
   name: string;
   profilePic: string;
 }
+export interface UpdateProfileType {
+  id?: string;
+  email?: string;
+  password?: string;
+  about?: string;
+  role?: string;
+  name?: string;
+  imageUrl?: string;
+}
 export type SignupPayloadType = {
   email: string;
   password: string;
@@ -37,6 +46,6 @@ export type AuthStoreType = {
     formdata: any
   ) => Promise<uploadBlogImageResponseBody | undefined>;
   updateProfileAction: (
-    imageUrl: string
+    body: UpdateProfileType
   ) => Promise<uploadBlogImageResponseBody | undefined>;
 };

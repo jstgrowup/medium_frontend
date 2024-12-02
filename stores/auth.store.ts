@@ -3,6 +3,7 @@ import {
   AuthStoreType,
   SigninPayloadType,
   SignupPayloadType,
+  UpdateProfileType,
 } from "../utils/types.ts/user.types";
 import { showErrorToast, showSuccessToast } from "@/components/common/toast";
 
@@ -79,7 +80,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
       set({ error: error.message });
     }
   },
-  updateProfileAction: async (imageUrl: string) => {
+  updateProfileAction: async (body: UpdateProfileType) => {
     set({ loading: true });
     try {
       const response = await callApi({
@@ -87,11 +88,9 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
           process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
             ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
             : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
-        }/api/v1/user/update/profile-picture`,
+        }/api/v1/user/update/profile`,
         method: "POST",
-        body: {
-          imageUrl,
-        },
+        body: body,
       });
       showSuccessToast(response.message);
       set({ loading: false });

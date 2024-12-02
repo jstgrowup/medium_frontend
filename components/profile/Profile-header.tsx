@@ -1,20 +1,34 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Edit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CommonModal } from "../common/Modal";
 import { useAuthStore } from "@/stores/auth.store";
-const ProfileHeader: React.FC<{ jobRole: string; name: string }> = ({
-  jobRole,
-  name,
-}) => {
+const ProfileHeader = () => {
   const userData = useAuthStore((state) => state.data);
+  const updateProfileAction = useAuthStore(
+    (state) => state.updateProfileAction
+  );
+  const [formData, setFormData] = useState({
+    name: userData?.name || "",
+    role: userData?.role || "",
+  });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+  const handleSaveChanges = () => {
+    updateProfileAction(formData);
+  };
   return (
     <div className="pt-20 px-6 ">
-      <h1 className="text-2xl font-bold text-gray-800">{name}</h1>
-      <p className="text-gray-600">{jobRole}</p>
+      <h1 className="text-2xl font-bold text-gray-800">{userData?.name}</h1>
+      <p className="text-gray-600">{userData?.role}</p>
       <div className="mt-4 flex gap-4  justify-between">
         <div className="gap-3 flex">
           <button className="px-4 py-2 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-400">
@@ -33,7 +47,11 @@ const ProfileHeader: React.FC<{ jobRole: string; name: string }> = ({
           }
           title="Edit Profile"
           description="Make changes to your profile here. Click save when you're done."
-          footer={<Button type="submit">Save changes</Button>}
+          footer={
+            <Button type="submit" onClick={handleSaveChanges}>
+              Save changes
+            </Button>
+          }
         >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
@@ -41,17 +59,19 @@ const ProfileHeader: React.FC<{ jobRole: string; name: string }> = ({
             </Label>
             <Input
               id="name"
-              defaultValue="Pedro Duarte"
+              value={formData.name}
+              onChange={handleInputChange}
               className="col-span-3"
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Username
+              Role
             </Label>
             <Input
-              id="username"
-              defaultValue="@peduarte"
+              id="role"
+              value={formData.role}
+              onChange={handleInputChange}
               className="col-span-3"
             />
           </div>

@@ -21,7 +21,7 @@ const ProfileNavbar = () => {
       const imageUrl = response?.data.url;
       setLocalImageUrl(imageUrl ?? "");
       if (imageUrl) {
-        updateProfileAction(imageUrl ?? "");
+        updateProfileAction({ imageUrl });
       }
     } catch (error) {
       console.error("File upload failed:", error);
