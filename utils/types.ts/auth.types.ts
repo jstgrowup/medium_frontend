@@ -18,4 +18,7 @@ export interface CommonModalProps {
   description: string;
   children: React.ReactNode;
   footer?: React.ReactNode;
+  loading?: boolean;
+  handleSaveChanges: () => void;
+  btnText: string;
 }

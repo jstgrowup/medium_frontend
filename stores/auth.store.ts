@@ -11,11 +11,12 @@ import axios from "axios";
 import { callApi } from "@/actions/apiClient";
 import { uploadBlogImageResponseBody } from "@/utils/types.ts/blogs.types";
 
-export const useAuthStore = create<AuthStoreType>((set) => ({
+export const useAuthStore = create<AuthStoreType>((set, get) => ({
   loading: false,
   isAuthenticated: false,
   error: null,
   data: null,
+  profileLoading: false,
   signUpAction: async (payload: SignupPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
@@ -81,7 +82,7 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
     }
   },
   updateProfileAction: async (body: UpdateProfileType) => {
-    set({ loading: true });
+    set({ profileLoading: true });
     try {
       const response = await callApi({
         endpoint: `${
@@ -93,7 +94,9 @@ export const useAuthStore = create<AuthStoreType>((set) => ({
         body: body,
       });
       showSuccessToast(response.message);
-      set({ loading: false });
+      const { checkSessionToken } = get();
+      await checkSessionToken();
+      set({ profileLoading: false });
       return response.message;
     } catch (error: any) {
       showErrorToast(error.response.data.error);

@@ -11,6 +11,7 @@ const ProfileHeader = () => {
   const updateProfileAction = useAuthStore(
     (state) => state.updateProfileAction
   );
+  const profileLoading = useAuthStore((state) => state.profileLoading);
   const [formData, setFormData] = useState({
     name: userData?.name || "",
     role: userData?.role || "",
@@ -47,11 +48,9 @@ const ProfileHeader = () => {
           }
           title="Edit Profile"
           description="Make changes to your profile here. Click save when you're done."
-          footer={
-            <Button type="submit" onClick={handleSaveChanges}>
-              Save changes
-            </Button>
-          }
+          loading={profileLoading}
+          handleSaveChanges={handleSaveChanges}
+          btnText="Update"
         >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">

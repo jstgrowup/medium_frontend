@@ -36,6 +36,7 @@ export type LogoutResponseType = {
 export type AuthStoreType = {
   isAuthenticated: boolean;
   loading: boolean;
+  profileLoading: boolean;
   error: string | null;
   data: any;
   signUpAction: (payload: SignupPayloadType) => Promise<void>;
