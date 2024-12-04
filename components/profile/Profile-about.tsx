@@ -6,22 +6,29 @@ import { Edit } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import ProfileAboutLoader from "./loaders/profile-about-loader";
 
 const ProfileAbout = () => {
-  const userData = useAuthStore((state) => state.data);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { data, loading } = useAuthStore((state) => state);
   const updateProfileAction = useAuthStore(
     (state) => state.updateProfileAction
   );
   const profileLoading = useAuthStore((state) => state.profileLoading);
-  const [formData, setFormData] = useState(userData?.about || "");
+  const [formData, setFormData] = useState(data?.about || "");
   const handleSaveChanges = () => {
     updateProfileAction({ about: formData });
+    setIsModalOpen(false);
   };
   return (
     <div className="px-6 py-4 border-t  flex justify-between items-center">
       <div>
         <h2 className="text-lg font-semibold text-gray-800">About</h2>
-        <p className="text-gray-600 mt-2">{userData?.about}</p>
+        {loading ? (
+          <ProfileAboutLoader />
+        ) : (
+          <p className="text-gray-600 mt-2">{data?.about}</p>
+        )}
       </div>
       <CommonModal
         triggerContent={
@@ -40,6 +47,8 @@ const ProfileAbout = () => {
         loading={profileLoading}
         handleSaveChanges={handleSaveChanges}
         btnText="Update"
+        onClose={() => setIsModalOpen(!isModalOpen)}
+        isOpen={isModalOpen}
       >
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name" className="text-right">

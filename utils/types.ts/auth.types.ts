@@ -21,4 +21,6 @@ export interface CommonModalProps {
   loading?: boolean;
   handleSaveChanges: () => void;
   btnText: string;
+  onClose: (value: React.SetStateAction<boolean>) => void;
+  isOpen: boolean;
 }

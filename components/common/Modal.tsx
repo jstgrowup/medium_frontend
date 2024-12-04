@@ -17,9 +17,11 @@ export const CommonModal = ({
   children,
   loading,
   handleSaveChanges,
+  onClose,
+  isOpen,
 }: CommonModalProps) => {
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogTrigger asChild>{triggerContent}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-white rounded-lg shadow-lg p-6 overflow-hidden">
         <DialogHeader className="border-b border-gray-200 pb-4 mb-4">

@@ -11,6 +11,7 @@ const ProfileHeader = () => {
   const updateProfileAction = useAuthStore(
     (state) => state.updateProfileAction
   );
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const profileLoading = useAuthStore((state) => state.profileLoading);
   const [formData, setFormData] = useState({
     name: userData?.name || "",
@@ -25,6 +26,7 @@ const ProfileHeader = () => {
   };
   const handleSaveChanges = () => {
     updateProfileAction(formData);
+    setIsModalOpen(false);
   };
   return (
     <div className="pt-20 px-6 ">
@@ -51,6 +53,8 @@ const ProfileHeader = () => {
           loading={profileLoading}
           handleSaveChanges={handleSaveChanges}
           btnText="Update"
+          onClose={() => setIsModalOpen(!isModalOpen)}
+          isOpen={isModalOpen}
         >
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
