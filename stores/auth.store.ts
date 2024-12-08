@@ -20,7 +20,14 @@ export const useAuthStore = create<AuthStoreType>((set, get) => ({
   signUpAction: async (payload: SignupPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
-      const response = await axios.post(`/api/signup`, payload);
+      const response = await axios.post(
+        `${
+          process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
+            ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
+            : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
+        }/api/v1/user/signup`,
+        payload
+      );
       showSuccessToast(response.data.message);
       set({ loading: false, data: response.data, isAuthenticated: true });
     } catch (error: any) {
