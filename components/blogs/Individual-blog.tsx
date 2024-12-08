@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 import { BlogType } from "@/utils/types.ts/blogs.types";
 
 export const IndividualBlog = () => {
-  const [individualBlog, setIndividualBlog] = useState<BlogType | null>(null);
+  const [individualBlog, setIndividualBlog] = useState<BlogType | undefined>(
+    undefined
+  );
   const paramsHook = useParams();
   const params = paramsHook;
   const blogId = params.blogId as string;

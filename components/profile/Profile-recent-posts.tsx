@@ -19,7 +19,10 @@ const ProfileRecentPosts = () => {
       <div className="mt-4">
         {blogs?.map((blog) => {
           return (
-            <div className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4">
+            <div
+              key={blog.id}
+              className="bg-gray-100 p-4 rounded-lg shadow-sm mb-4"
+            >
               <h4 className="font-bold text-gray-800">{blog.title}</h4>
               <p
                 className="text-gray-600"
