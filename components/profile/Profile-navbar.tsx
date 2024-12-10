@@ -50,7 +50,7 @@ const ProfileNavbar = () => {
             <Image
               src="/no-profile.jpg"
               alt="No Profile Picture"
-              className="rounded-full border-4 border-white shadow-lg"
+              className="w-full h-full rounded-full border-4 border-white shadow-lg object-cover"
               width={100}
               height={100}
             />

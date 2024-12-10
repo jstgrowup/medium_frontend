@@ -12,7 +12,8 @@ export async function POST(request: Request, response: Response) {
       );
     }
     const payload = { email, password };
-    const apiResponse = await api.post(`/api/v1/user/signin`, payload);
+    const apiResponse: { data: { message: string; token: string } } =
+      await api.post(`/api/v1/user/signin`, payload);
     const token = apiResponse.data.token;
     cookies().set("token", token, {
       httpOnly: true,
@@ -22,10 +23,12 @@ export async function POST(request: Request, response: Response) {
       maxAge: 60 * 60,
     });
     return Response.json({
-      message: "Login Successful!",
+      message: apiResponse.data.message,
     });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({ message: "Server Error" }, { status: 500 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.response.data.error },
+      { status: 500 }
+    );
   }
 }
