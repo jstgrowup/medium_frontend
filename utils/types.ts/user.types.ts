@@ -17,7 +17,7 @@ export interface UpdateProfileType {
   about?: string;
   role?: string;
   name?: string;
-  imageUrl?: string;
+  profilePic?: string;
 }
 export type SignupPayloadType = {
   email: string;
@@ -33,12 +33,13 @@ export type LogoutResponseType = {
     message: string;
   };
 };
+
 export type AuthStoreType = {
   isAuthenticated: boolean;
   loading: boolean;
   profileLoading: boolean;
   error: string | null;
-  data: any;
+  data: UserType | null;
   signUpAction: (payload: SignupPayloadType) => Promise<void>;
   signInAction: (payload: SigninPayloadType) => Promise<void>;
   logoutAction: () => Promise<LogoutResponseType | undefined>;

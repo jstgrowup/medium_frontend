@@ -42,6 +42,7 @@ export const Navbar = () => {
           logoutAction={handleLogout}
           profileRedirect={profileRedirect}
           userName={userData?.name?.[0] || ""}
+          userProfilePic={userData?.profilePic || ""}
         />
       </div>
     </div>

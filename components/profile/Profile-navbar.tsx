@@ -23,7 +23,7 @@ const ProfileNavbar = () => {
       const imageUrl = response?.data.url;
       setLocalImageUrl(imageUrl ?? "");
       if (imageUrl) {
-        updateProfileAction({ imageUrl });
+        updateProfileAction({ profilePic: imageUrl });
       }
     } catch (error) {
       console.error("File upload failed:", error);
@@ -32,7 +32,7 @@ const ProfileNavbar = () => {
 
   return (
     <div className="relative bg-gradient-to-r from-purple-600 to-blue-500 h-40">
-      <div className="absolute -bottom-16 left-6">
+      <div className="absolute -bottom-16 left-6 ">
         <div className="relative  w-[100px] h-[100px]">
           {loading ? (
             <div className="w-full h-full flex items-center justify-center rounded-full border-4 border-white shadow-lg bg-gray-200">
@@ -42,7 +42,7 @@ const ProfileNavbar = () => {
             <Image
               src={userData?.profilePic}
               alt="Profile Picture"
-              className="rounded-full border-4 border-white shadow-lg"
+              className="rounded-full object-cover w-full h-full"
               width={100}
               height={100}
             />

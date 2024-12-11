@@ -1,6 +1,8 @@
 export type RecommendedFollowers = {
   name: string;
   id: string;
+  profilePic: string;
+  role: string;
 };
 export type FollowersDetails = {
   followerCount: number;
