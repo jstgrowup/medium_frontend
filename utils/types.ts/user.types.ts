@@ -9,6 +9,8 @@ export interface UserType {
   password: string;
   name: string;
   profilePic: string;
+  role?: string;
+  about?: string;
 }
 export interface UpdateProfileType {
   id?: string;
@@ -40,10 +42,12 @@ export type AuthStoreType = {
   profileLoading: boolean;
   error: string | null;
   data: UserType | null;
+  userProfile: UserType | null;
   signUpAction: (payload: SignupPayloadType) => Promise<void>;
   signInAction: (payload: SigninPayloadType) => Promise<void>;
   logoutAction: () => Promise<LogoutResponseType | undefined>;
   checkSessionToken: () => Promise<UserType | undefined>;
+  getUserProfile: (id: string) => Promise<UserType | undefined>;
   updateProfilePictureAction: (
     formdata: any
   ) => Promise<uploadBlogImageResponseBody | undefined>;

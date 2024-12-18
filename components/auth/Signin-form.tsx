@@ -3,10 +3,8 @@ import { AUTH_TYPE } from "@/utils/enums/Global-enums";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "@/stores/auth.store";
 import { useRouter } from "next/navigation";
-import AuthHeader from "./Auth-header";
 import LabelledInput from "./Labelled-input";
 import AuthButton from "./Auth-button";
-import Socials from "./Socials";
 const SigninForm = () => {
   const router = useRouter();
   const [userInputs, setuserInput] = useState<{

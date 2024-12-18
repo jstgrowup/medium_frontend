@@ -1,7 +1,7 @@
 "use server";
 import axios from "axios";
 import { cookies } from "next/headers";
-
+import { redirect } from "next/navigation";
 export async function callApi({
   endpoint,
   method = "GET",
@@ -13,7 +13,7 @@ export async function callApi({
 }) {
   const token = cookies().get("token")?.value;
   if (!token) {
-    throw new Error("Authentication token not found");
+    redirect("/signin");
   }
   const api = axios.create({
     baseURL:

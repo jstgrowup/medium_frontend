@@ -23,7 +23,7 @@ export default function WhoToFollow() {
       <h2 className="text-lg font-semibold">Who to follow</h2>
       {followRecommendations && followRecommendations?.length > 0 ? (
         followRecommendations.map((user, index) => (
-          <Link href={`/profile/${user.id}`}>
+          <Link href={`/profile/${user.id}`} key={index}>
             <div
               key={index}
               className="flex items-center justify-between p-2 hover:bg-gray-50 rounded-md border border-gray-300"
@@ -31,11 +31,11 @@ export default function WhoToFollow() {
               <div className="flex items-center space-x-3 ">
                 <div className="h-12 w-12 rounded-full  flex justify-center items-center">
                   <Image
-                    src={user.profilePic}
+                    src={user?.profilePic ?? "/no-profile.jpg"}
                     alt={"/no-profile.jpg"}
                     className="rounded-full object-cover w-full h-full"
                     width={100}
-                    height={100}
+                    height={400}
                   />
                 </div>
                 <div>

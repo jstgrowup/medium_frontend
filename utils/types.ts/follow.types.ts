@@ -30,4 +30,11 @@ export type FollowStoreType = {
   followerCount: number;
   followingCount: number;
   postCount: number;
+  profileFollowerCount: number;
+  profileFollowingCount: number;
+  profilePostCount: number;
+  isFollowing: number;
+  profileFollowDetailsAction: (
+    id: string
+  ) => Promise<FollowersDetailsResponseBody | undefined>;
 };

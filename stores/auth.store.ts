@@ -17,6 +17,7 @@ export const useAuthStore = create<AuthStoreType>((set, get) => ({
   error: null,
   data: null,
   profileLoading: false,
+  userProfile: null,
   signUpAction: async (payload: SignupPayloadType) => {
     set({ loading: true, error: null, data: null });
     try {
@@ -69,6 +70,28 @@ export const useAuthStore = create<AuthStoreType>((set, get) => ({
         method: "GET",
       });
       set({ loading: false, data: response.data });
+      return response;
+    } catch (error: any) {
+      showErrorToast(error.response.data.error);
+      set({ error: error.message, loading: false });
+    }
+  },
+  getUserProfile: async (id: string) => {
+    set({
+      loading: true,
+      error: null,
+      userProfile: null,
+    });
+    try {
+      const response = await callApi({
+        endpoint: `${
+          process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
+            ? process.env.NEXT_PUBLIC_DEV_BACKEND_URL
+            : process.env.NEXT_PUBLIC_PROD_BACKEND_URL
+        }/api/v1/user/profile/${id}`,
+        method: "GET",
+      });
+      set({ loading: false, userProfile: response.data });
       return response;
     } catch (error: any) {
       showErrorToast(error.response.data.error);
