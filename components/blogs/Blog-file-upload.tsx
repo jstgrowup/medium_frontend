@@ -6,6 +6,7 @@ const BlogFileUpload = ({
   onUpload,
   existingImageUrl,
   uploadBlogImageAction,
+  blogLoading,
 }: FileUploadProps) => {
   const [localImageUrl, setLocalImageUrl] = useState(existingImageUrl || "");
   const handleFileChange = async (
@@ -33,8 +34,16 @@ const BlogFileUpload = ({
         onChange={handleFileChange}
         className="lg:w-1/4 sm:w-1/2 md:w-1/2  border border-gray-300 rounded-md p-2"
       />
-      {localImageUrl && (
-        <div className="flex items-center justify-center lg:w-32 lg:h-32 sm:h-2 sm:w-2 md:h-20 md:w-20  rounded-md overflow-hidden">
+      {blogLoading ? (
+        <div className="flex items-center justify-center lg:w-32 lg:h-32 sm:h-2 sm:w-2 md:h-20 md:w-20 rounded-md overflow-hidden">
+          <img
+            src="/loading-process.svg"
+            alt="Loading"
+            className="h-10 w-10 animate-spin"
+          />
+        </div>
+      ) : localImageUrl ? (
+        <div className="flex items-center justify-center lg:w-32 lg:h-32 sm:h-2 sm:w-2 md:h-20 md:w-20 rounded-md overflow-hidden">
           <Image
             src={localImageUrl}
             alt="Uploaded Image"
@@ -43,6 +52,8 @@ const BlogFileUpload = ({
             height={100}
           />
         </div>
+      ) : (
+        <p>No image available</p>
       )}
     </div>
   );

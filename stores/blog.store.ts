@@ -52,6 +52,7 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
   data: null,
   followRecommendations: [],
   imageUrl: "",
+  blogLoading: false,
   bulkBlogsAction: async () => {
     set({ loading: true, error: null });
     try {
@@ -67,11 +68,11 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
     set({ loading: true, error: null });
     try {
       const newBlog = await createBlog(blogPayload);
-      showSuccessToast(newBlog.data.message);
+      showSuccessToast(newBlog?.message);
       set({ loading: false });
       return newBlog;
     } catch (error: any) {
-      showErrorToast(error.response.data.error);
+      showErrorToast(error?.response?.data?.error);
       set({ error: error.message, loading: false });
     }
   },
@@ -91,13 +92,14 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
     }
   },
   uploadBlogImageAction: async (formData: any) => {
+    set({ blogLoading: true, error: null });
     try {
       const uplaodedImage: uploadBlogImageResponseBody = await axios.post(
         "/api/s3-upload",
         formData
       );
       showSuccessToast(uplaodedImage.data.message);
-      set({ imageUrl: uplaodedImage?.data?.url });
+      set({ imageUrl: uplaodedImage?.data?.url, blogLoading: false });
       return uplaodedImage;
     } catch (error: any) {
       showErrorToast(error.response.data.error);

@@ -18,7 +18,8 @@ export default function CreateBlog() {
   });
   const createBlog = useBlogStore((state) => state.createBlogAction);
   const blogLoading = useBlogStore((state) => state.loading);
-  const { uploadBlogImageAction } = useBlogStore((state) => state);
+  const { uploadBlogImageAction, blogLoading: imageBlogUploading } =
+    useBlogStore((state) => state);
   const handleImageUpload = (imageUrl: string) => {
     setblog((prev) => ({ ...prev, imageUrl }));
   };
@@ -37,6 +38,7 @@ export default function CreateBlog() {
           onUpload={handleImageUpload}
           existingImageUrl={blog?.imageUrl}
           uploadBlogImageAction={uploadBlogImageAction}
+          blogLoading={imageBlogUploading}
         />
       </div>
       <div className="w-full border shadow-md rounded-lg p-3">

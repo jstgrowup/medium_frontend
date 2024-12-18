@@ -36,9 +36,7 @@ export interface BlogBodyInterface extends BlogType {
   success?: boolean;
 }
 export interface CreatedBlogResponseBody {
-  data: {
-    message: string;
-  };
+  message: string;
 }
 export interface uploadBlogImageResponseBody {
   data: {
@@ -51,6 +49,7 @@ export type BlogStoreType = {
   error: string | null;
   blogs: BlogType[];
   imageUrl: string;
+  blogLoading: boolean;
   bulkBlogsAction: () => Promise<BulkBlogResponseType | undefined>;
   createBlogAction: (payload: BlogPayloadType) => void;
   individualBlogAction: (blogId: string) => Promise<BlogType | undefined>;
@@ -62,4 +61,5 @@ export interface FileUploadProps {
   onUpload: (imageUrl: string) => void;
   existingImageUrl?: string;
   uploadBlogImageAction: (formData: FormData) => Promise<any>;
+  blogLoading: boolean;
 }
