@@ -51,12 +51,10 @@ const ProfileAbout = () => {
         isOpen={isModalOpen}
       >
         <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="name" className="text-right">
-            About
-          </Label>
+          <Label htmlFor="name">About</Label>
           <Input
             id="name"
-            value={formData.about}
+            value={formData}
             onChange={(e) => setFormData(e.target.value)}
             className="col-span-3"
           />

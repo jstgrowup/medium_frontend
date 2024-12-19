@@ -8,7 +8,6 @@ const ProfileNavbar = () => {
     (state) => state
   );
   const { loading } = useAuthStore((state) => state);
-
   const userData = useAuthStore((state) => state.data);
   const [localImageUrl, setLocalImageUrl] = useState<string>("");
   const handleFileChange = async (

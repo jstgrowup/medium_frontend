@@ -9,16 +9,17 @@ export const IndividualBlog = () => {
   const [individualBlog, setIndividualBlog] = useState<BlogType | undefined>(
     undefined
   );
+
   const paramsHook = useParams();
   const params = paramsHook;
   const blogId = params.blogId as string;
-
+  const individualBlogAction = useBlogStore(
+    (state) => state.individualBlogAction
+  );
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const blogData = await useBlogStore
-          .getState()
-          .individualBlogAction(blogId);
+        const blogData = await individualBlogAction(blogId);
         setIndividualBlog(blogData);
       } catch (err: any) {
         console.error(err);

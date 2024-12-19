@@ -33,14 +33,7 @@ const ProfileHeader = () => {
       <h1 className="text-2xl font-bold text-gray-800">{userData?.name}</h1>
       <p className="text-gray-600">{userData?.role}</p>
       <div className="mt-4 flex gap-4  justify-between">
-        <div className="gap-3 flex">
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-400">
-            Follow
-          </button>
-          <button className="px-4 py-2 bg-gray-300 text-gray-800 rounded-full shadow-md hover:bg-gray-200">
-            Message
-          </button>
-        </div>
+        <div></div>
         <CommonModal
           triggerContent={
             <button className="flex items-center gap-2 px-4 py-1 border border-gray-400 text-gray-600 rounded-full hover:text-gray-800 hover:border-gray-500 hover:bg-gray-50 transition duration-200">
@@ -56,10 +49,8 @@ const ProfileHeader = () => {
           onClose={() => setIsModalOpen(!isModalOpen)}
           isOpen={isModalOpen}
         >
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
+          <div className="grid grid-cols-4 items-center gap-4 ">
+            <Label htmlFor="name">Name</Label>
             <Input
               id="name"
               value={formData.name}
@@ -68,9 +59,7 @@ const ProfileHeader = () => {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Role
-            </Label>
+            <Label htmlFor="username">Role</Label>
             <Input
               id="role"
               value={formData.role}

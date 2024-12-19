@@ -14,6 +14,8 @@ export interface BlogType {
   createdAt?: string;
   author?: {
     name?: string;
+    profilePic?: string;
+    role?: string;
   };
   id?: string;
   imageUrl?: string;

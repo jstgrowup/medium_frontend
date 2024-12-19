@@ -34,7 +34,7 @@ const createBlog = (
     body: blogPayload,
   });
 };
-const getSingleBlog = async (blogId: string): Promise<SingleBlogPropType> => {
+const getSingleBlog = async (blogId: string): Promise<BlogType> => {
   return callApi({
     endpoint: `${
       process.env.NEXT_PUBLIC_SERVER_ENV === "dev"
@@ -84,7 +84,7 @@ export const useBlogStore = create<BlogStoreType>((set) => ({
     try {
       const response = await getSingleBlog(blogId);
       set({ loading: false });
-      return response.data;
+      return response;
     } catch (error: any) {
       showErrorToast(error.response?.data?.error || "An error occurred");
       set({ error: error.message, loading: false });
