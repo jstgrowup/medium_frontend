@@ -36,7 +36,7 @@ const BlogFileUpload = ({
       />
       {blogLoading ? (
         <div className="flex items-center justify-center lg:w-32 lg:h-32 sm:h-2 sm:w-2 md:h-20 md:w-20 rounded-md overflow-hidden">
-          <img
+          <Image
             src="/loading-process.svg"
             alt="Loading"
             className="h-10 w-10 animate-spin"
