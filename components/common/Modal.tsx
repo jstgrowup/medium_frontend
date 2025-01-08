@@ -23,7 +23,7 @@ export const CommonModal = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogTrigger asChild>{triggerContent}</DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white rounded-lg shadow-lg p-6 overflow-hidden">
+      <DialogContent className="sm:max-w-[425px] bg-white rounded-lg shadow-lg p-6 overflow-hidden border border-black">
         <DialogHeader className="border-b border-gray-200 pb-4 mb-4">
           <DialogTitle className="text-xl font-semibold text-gray-800">
             {title}
